@@ -147,7 +147,7 @@ class AlphaVantageAPI:
     
 
     def get_eps(self, symbol, start_year=None, end_year=None):
-        # Obtenha a visão geral da empresa
+        # Obter a visão geral da empresa
         overview = self.get_financial_data(symbol, 'OVERVIEW')
         outstanding_shares = float(overview.get('SharesOutstanding', 0))  # Ações em circulação
         income_statements = self.get_income_statement(symbol, start_year, end_year)
@@ -166,6 +166,107 @@ class AlphaVantageAPI:
         })
         
         return eps_list
+    
+    def get_debt_ratio(self, symbol, start_year=None, end_year=None):
+        balance_sheets = self.get_balance_sheet(symbol, start_year, end_year)
+        debt_ratios = []
+        for report in balance_sheets:
+            total_liabilities = float(report['totalLiabilities'])
+            shareholders_equity = float(report['totalShareholderEquity'])
+            if shareholders_equity != 0:
+                debt_ratio = total_liabilities / shareholders_equity
+            else:
+                debt_ratio = 0  # Evita divisão por zero
+            debt_ratios.append({
+                'fiscalDateEnding': report['fiscalDateEnding'],
+                'totalLiabilities': total_liabilities,
+                'shareholdersEquity': shareholders_equity,
+                'debtRatio': debt_ratio
+            })
+        return debt_ratios
+    
+    
+    def get_current_ratio(self, symbol, start_year=None, end_year=None):
+        balance_sheets = self.get_balance_sheet(symbol, start_year, end_year)
+        current_ratios = []
+        for report in balance_sheets:
+            current_assets = float(report.get('totalCurrentAssets', 0))
+            current_liabilities = float(report.get('totalCurrentLiabilities', 0))
+            if current_liabilities != 0:
+                current_ratio = current_assets / current_liabilities
+            else:
+                current_ratio = 0  # Evita divisão por zero
+            current_ratios.append({
+                'fiscalDateEnding': report['fiscalDateEnding'],
+                'currentAssets': current_assets,
+                'currentLiabilities': current_liabilities,
+                'currentRatio': current_ratio
+            })
+        return current_ratios
+    
+    
+    def get_cash_ratio(self, symbol, start_year=None, end_year=None):
+        balance_sheets = self.get_balance_sheet(symbol, start_year, end_year)
+        cash_ratios = []
+        for report in balance_sheets:
+            cash_and_equivalents = float(report.get('cashAndCashEquivalentsAtCarryingValue', 0))
+            total_assets = float(report.get('totalAssets', 0))
+            if total_assets != 0:
+                cash_ratio = cash_and_equivalents / total_assets
+            else:
+                cash_ratio = 0  # Evita divisão por zero
+            cash_ratios.append({
+                'fiscalDateEnding': report['fiscalDateEnding'],
+                'cashAndEquivalents': cash_and_equivalents,
+                'totalAssets': total_assets,
+                'cashRatio': cash_ratio
+            })
+        return cash_ratios
+
+    def get_operating_cash_flow(self, symbol, start_year=None, end_year=None):
+        cash_flows = self.get_cash_flow(symbol, start_year, end_year)
+        operating_cash_flows = []
+        for report in cash_flows:
+            cash_generated_by_operating_activities = float(report.get('operatingCashflow', 0))
+            operating_cash_flows.append({
+                'fiscalDateEnding': report['fiscalDateEnding'],
+                'operatingCashFlow': cash_generated_by_operating_activities
+            })
+        return operating_cash_flows
+
+
+    def get_free_cash_flow(self, symbol, start_year=None, end_year=None):
+        cash_flows = self.get_cash_flow(symbol, start_year, end_year)
+        free_cash_flows = []
+        for report in cash_flows:
+            operating_cash_flow = float(report.get('operatingCashflow', 0))
+            capital_expenditure = float(report.get('capitalExpenditures', 0))
+            free_cash_flow = operating_cash_flow - capital_expenditure
+            free_cash_flows.append({
+                'fiscalDateEnding': report['fiscalDateEnding'],
+                'operatingCashFlow': operating_cash_flow,
+                'capitalExpenditure': capital_expenditure,
+                'freeCashFlow': free_cash_flow
+            })
+        return free_cash_flows
+    
+    def get_capex_ratio(self, symbol, start_year=None, end_year=None):
+        cash_flows = self.get_cash_flow(symbol, start_year, end_year)
+        capex_ratios = []
+        for report in cash_flows:
+            operating_cash_flow = float(report.get('operatingCashflow', 0))
+            capital_expenditure = float(report.get('capitalExpenditures', 0))
+            if operating_cash_flow != 0:
+                capex_ratio = capital_expenditure / operating_cash_flow
+            else:
+                capex_ratio = 0  # Evita divisão por zero
+            capex_ratios.append({
+                'fiscalDateEnding': report['fiscalDateEnding'],
+                'operatingCashFlow': operating_cash_flow,
+                'capitalExpenditure': capital_expenditure,
+                'capexRatio': capex_ratio
+            })
+        return capex_ratios
 
 
 
