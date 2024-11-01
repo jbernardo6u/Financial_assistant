@@ -1,3 +1,8 @@
-pandas
-yfinance
+pandas~=2.2.3
 numpy
+djangorestframework
+psycopg2
+django~=5.1.2
+
+requests~=2.32.3
+yfinance~=0.2.48
