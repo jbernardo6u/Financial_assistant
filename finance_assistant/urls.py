@@ -19,15 +19,9 @@ from django.urls import path
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from analysis import views
-
-router = DefaultRouter()
-router.register(r'companies', views.CompanyViewSet, basename='company')
-router.register(r'indicators', views.IndicatorViewSet, basename='indicator')
+from analysis import views, urls
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('api/', include(urls.urlpatterns_api)),
     path("admin/", admin.site.urls),
 ]
-
-
