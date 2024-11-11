@@ -12,13 +12,12 @@ class Company(models.Model):
 class FinancialDocument(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     year = models.IntegerField()
-    revenue = models.BigIntegerField()
-    net_income = models.BigIntegerField()
-    total_assets = models.BigIntegerField()
-    total_liabilities = models.BigIntegerField()
-    operating_cash_flow = models.BigIntegerField()
-    capital_expenditures = models.BigIntegerField()
-
+    revenue = models.BigIntegerField(null=True, blank=True)
+    net_income = models.BigIntegerField(null=True, blank=True)
+    total_assets = models.BigIntegerField(null=True, blank=True)
+    total_liabilities = models.BigIntegerField(null=True, blank=True)
+    operating_cash_flow = models.BigIntegerField(null=True, blank=True)
+    capital_expenditures = models.BigIntegerField(null=True, blank=True)
     class Meta:
         unique_together = ('company', 'year')
 
