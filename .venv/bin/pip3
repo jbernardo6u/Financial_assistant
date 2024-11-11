@@ -1,4 +1,4 @@
-#!/Users/josebantu/Documents/PROJETOS/Financial-assistant/.venv/bin/python3.12
+#!/Users/josebantu/Documents/PROJETOS/Financial-assistant/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

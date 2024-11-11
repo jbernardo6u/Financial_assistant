@@ -1,2 +1,0 @@
-SOCIETY = "MSFT"
-API_KEY = ""

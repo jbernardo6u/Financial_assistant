@@ -11,7 +11,7 @@ class Company(models.Model):
 
 class FinancialDocument(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    report_year = models.IntegerField()
+    year = models.IntegerField()
     revenue = models.BigIntegerField()
     net_income = models.BigIntegerField()
     total_assets = models.BigIntegerField()
@@ -20,15 +20,15 @@ class FinancialDocument(models.Model):
     capital_expenditures = models.BigIntegerField()
 
     class Meta:
-        unique_together = ('company', 'report_year')
+        unique_together = ('company', 'year')
 
 class FinancialIndicator(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    report_year = models.IntegerField()
+    year = models.IntegerField()
     gross_profit_margin = models.FloatField()
     net_profit_margin = models.FloatField()
     debt_ratio = models.FloatField()
     free_cash_flow = models.BigIntegerField()
 
     class Meta:
-        unique_together = ('company', 'report_year')
+        unique_together = ('company', 'year')
