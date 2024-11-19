@@ -1,8 +1,6 @@
 from django.utils import timezone
 from django.db import models
 
-# Create your models here.
-
 class Company(models.Model):
     symbol = models.CharField(max_length=10, unique=True)
     name = models.CharField(max_length=100)
@@ -10,19 +8,21 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+
 class FinancialDocument(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     year = models.IntegerField()
 
+    # Financial fields
     revenue = models.BigIntegerField(null=True, blank=True)
     net_income = models.BigIntegerField(null=True, blank=True)
-    # Add the cogs (Cost of Goods Sold) field if it's missing
     operating_expenses = models.BigIntegerField(null=True, blank=True)
     r_and_d_costs = models.BigIntegerField(null=True, blank=True)
     shares_outstanding = models.BigIntegerField(null=True, blank=True)
     cogs = models.BigIntegerField(null=True, blank=True)  # Cost of Goods Sold
     gross_profit = models.BigIntegerField(null=True, blank=True)
 
+    # Balance Sheet fields
     total_assets = models.BigIntegerField(null=True, blank=True)
     current_assets = models.BigIntegerField(null=True, blank=True)
     current_liabilities = models.BigIntegerField(null=True, blank=True)
@@ -30,9 +30,9 @@ class FinancialDocument(models.Model):
     total_liabilities = models.BigIntegerField(null=True, blank=True)
     shareholders_equity = models.BigIntegerField(null=True, blank=True)
 
+    # Cash Flow fields
     operating_cash_flow = models.BigIntegerField(null=True, blank=True)
     capital_expenditures = models.BigIntegerField(null=True, blank=True)
-
 
     class Meta:
         unique_together = ('company', 'year')
@@ -41,8 +41,9 @@ class FinancialDocument(models.Model):
 class FinancialIndicator(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     year = models.IntegerField()
-    document = models.ForeignKey(FinancialDocument, on_delete=models.CASCADE)
 
+    # Set `null=True` temporarily for document to avoid migration issues
+    document = models.ForeignKey(FinancialDocument, on_delete=models.CASCADE, null=True, blank=True)
 
     # Profitability Indicators
     gross_profit_margin = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
@@ -61,7 +62,7 @@ class FinancialIndicator(models.Model):
     free_cash_flow = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     capital_expenditure_ratio = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
 
-    # other fields...
+    # Other fields
     calculated_at = models.DateTimeField(default=timezone.now)
 
     class Meta:

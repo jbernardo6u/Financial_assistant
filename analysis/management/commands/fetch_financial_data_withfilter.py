@@ -1,11 +1,12 @@
 import time
 import requests
 from django.core.management.base import BaseCommand
-from analysis.models import Company, FinancialDocument
 from django.db import transaction
+from analysis.models import Company, FinancialDocument
+from datetime import datetime
 
 # Alpha Vantage API Key
-ALPHA_VANTAGE_API_KEY = 'TYX7BASZ21ZB7CA8' #'J90GF2FV5KC3C88N'      #'F3Z55WYNQY3KJ1Y0'  # Replace with your API key   'WAE0T1ELGUKW2DC0'
+ALPHA_VANTAGE_API_KEY = '3D3KDQX0TSLTSDO4'      #'F3Z55WYNQY3KJ1Y0'  # Replace with your API key   'WAE0T1ELGUKW2DC0'
 NUM_YEARS = 10  # Define the number of years to process
 GLOBAL_DELAY = 15  # Global delay in seconds between API requests
 
@@ -20,9 +21,6 @@ def fetch_financial_data(symbol, report_type):
         response.raise_for_status()
         data = response.json()
 
-        # Debug: Log the full response for troubleshooting
-        print(f"Full response for {symbol} ({report_type}): {data}")
-
         # Check for rate limit errors
         if "Note" in data:
             print(f"Rate limit hit for {symbol}: {data['Note']}")
@@ -34,7 +32,14 @@ def fetch_financial_data(symbol, report_type):
             if 'annualReports' not in data:
                 print(f"No annual reports data found for {symbol} ({report_type}).")
                 return None
-            return data['annualReports'][:NUM_YEARS]  # Return the last NUM_YEARS reports
+
+            # Filter reports for the last NUM_YEARS
+            current_year = datetime.now().year
+            annual_reports = [
+                report for report in data['annualReports']
+                if current_year - int(report['fiscalDateEnding'][:4]) < NUM_YEARS
+            ]
+            return annual_reports
         elif report_type == 'OVERVIEW':
             if 'SharesOutstanding' not in data:
                 print(f"No SharesOutstanding data found for {symbol} in overview.")
@@ -79,11 +84,15 @@ class Command(BaseCommand):
             # Process and save data
             try:
                 with transaction.atomic():
-                    for i, report in enumerate(income_statements):
+                    for report in income_statements:
                         year = int(report['fiscalDateEnding'][:4])
                         income_statement = report
-                        balance_sheet = balance_sheets[i] if i < len(balance_sheets) else {}
-                        cash_flow = cash_flows[i] if i < len(cash_flows) else {}
+                        balance_sheet = next(
+                            (bs for bs in balance_sheets if int(bs['fiscalDateEnding'][:4]) == year), {}
+                        )
+                        cash_flow = next(
+                            (cf for cf in cash_flows if int(cf['fiscalDateEnding'][:4]) == year), {}
+                        )
 
                         # Update or create FinancialDocument records
                         FinancialDocument.objects.update_or_create(

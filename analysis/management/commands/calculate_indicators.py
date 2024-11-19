@@ -1,5 +1,3 @@
-# analysis/management/commands/calculate_indicators.py
-
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from analysis.models import Company, FinancialDocument, FinancialIndicator
@@ -9,7 +7,7 @@ from decimal import Decimal
 class Command(BaseCommand):
     help = 'Calculate financial indicators based on financial documents'
 
-    def calculate_profitability_indicators(self, doc):
+    def calculate_profitability_indicators(self, doc, previous_doc=None):
         revenue = Decimal(doc.revenue or 0)
         cogs = Decimal(doc.cogs or 0)  # Cost of Goods Sold
         operating_expenses = Decimal(doc.operating_expenses or 0)
@@ -31,11 +29,19 @@ class Command(BaseCommand):
         # Earnings Per Share (EPS)
         eps = (net_income / shares_outstanding) if shares_outstanding else None
 
+        # Profit Growth Rate
+        profit_growth_rate = None
+        if previous_doc:
+            previous_net_income = Decimal(previous_doc.net_income or 0)
+            if previous_net_income:
+                profit_growth_rate = (net_income - previous_net_income) / previous_net_income
+
         return {
             'gross_profit_margin': gross_profit_margin,
             'operating_profit_margin': operating_profit_margin,
             'net_profit_margin': net_profit_margin,
             'earnings_per_share': eps,
+            'profit_growth_rate': profit_growth_rate,
         }
 
     def calculate_balance_sheet_indicators(self, doc):
@@ -81,11 +87,12 @@ class Command(BaseCommand):
         companies = Company.objects.all()
 
         for company in companies:
-            financial_docs = FinancialDocument.objects.filter(company=company)
+            financial_docs = FinancialDocument.objects.filter(company=company).order_by('year')
 
+            previous_doc = None
             for doc in financial_docs:
                 # Calculate indicators
-                profitability_indicators = self.calculate_profitability_indicators(doc)
+                profitability_indicators = self.calculate_profitability_indicators(doc, previous_doc)
                 balance_sheet_indicators = self.calculate_balance_sheet_indicators(doc)
                 cash_flow_indicators = self.calculate_cash_flow_indicators(doc)
 
@@ -104,3 +111,6 @@ class Command(BaseCommand):
                     )
 
                 print(f"Calculated indicators for {company.symbol}, year {doc.year}")
+
+                # Update the previous document for the next iteration
+                previous_doc = doc
