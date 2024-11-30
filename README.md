@@ -1,16 +1,58 @@
 # Finance Assistant Project
 
-This project is a financial analysis tool using Django as the backend and React as the frontend.
+Finance Assistant is a financial analysis tool designed to help users make informed investment decisions. This project uses Django for the backend and React for the frontend, enabling financial data analysis and visualization.
+
+---
+
+## Table of Contents
+1. [Project Context](#project-context)
+2. [Project Objectives](#project-objectives)
+   - [Main Objective](#main-objective)
+   - [Specific Objectives](#specific-objectives)
+3. [Project Structure](#project-structure)
+4. [Requirements](#requirements)
+5. [Setup Instructions](#setup-instructions)
+6. [Financial Data from API](#financial-data-from-api)
+
+---
+
+## Project Context
+
+Investing in the stock market is often perceived as complex and time-consuming, requiring expertise in financial analysis and access to detailed company data. This project aims to simplify the investment process for users by providing an intelligent virtual assistant that:
+- Retrieves and analyzes financial reports.
+- Calculates growth potential and financial health indicators.
+- Presents data clearly through an interactive dashboard.
+
+---
+
+## Project Objectives
+
+### Main Objective
+Develop an intelligent virtual financial assistant that provides personalized and real-time investment advice.
+
+### Specific Objectives
+- Retrieve and analyze financial reports, including income statements, cash flow statements, and balance sheets.
+- Calculate financial health indicators and growth potential.
+- Present data visually to facilitate decision-making.
+- Integrate a chatbot for conversational interaction.
+- Develop an intuitive user interface for seamless user experience.
+
+---
 
 ## Project Structure
-- **backend/**: Django backend with REST API endpoints for financial data processing ( /analysis/).
-- **frontend/**: React frontend for user interaction and data visualization.
+- **`backend/`**: 
+  - Django backend with REST API endpoints for financial data processing (e.g., `/analysis/`).
+- **`frontend/`**: 
+  - React frontend for user interaction and data visualization.
+
+---
 
 ## Requirements
+- **Python 3.x**
+- **Node.js and npm**
+- **PostgreSQL** (or any other preferred database)
 
-- Python 3.x
-- Node.js and npm
-- PostgreSQL (or any other database you prefer)
+---
 
 ## Setup Instructions
 
@@ -18,77 +60,92 @@ This project is a financial analysis tool using Django as the backend and React 
 ```bash
 git clone https://github.com/your-username/Finance_assistant.git
 cd finance_assistant
+```
 
+### 2. Backend Setup
+#### 2.1. Create and activate a virtual environment:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+#### 2.2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+#### 2.3. Apply migrations:
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+#### 2.4. Start the server:
+```bash
+python manage.py runserver
+```
+### 3. Frontend Setup
+#### 3.1. Navigate to the frontend directory and install dependencies:
+```bash
+cd frontend
+npm install
+```
 
-### **Step 4: Running the Project Locally**
+#### 3.2. Start the React development server:
+```bash
+npm start
+```
 
-1. **Backend**:
-   - Follow the instructions in the `README.md` to set up and start the Django server.
-   - Ensure the database is properly set up and migrations are applied.
-
-2. **Frontend**:
-   - Follow the instructions to set up and start the React server.
-   - Verify the frontend and backend are correctly connected by testing some sample API requests.
+### 4. Verify Connectivity
+Test the backend by visiting http://127.0.0.1:8000/.
+Test the frontend by visiting http://localhost:3000/.
 
 ---
 
-### **Step 5: Push Changes to GitHub**
+## Financial Data from API
+### Income Statement Items
+1. Total Revenue: Operating Revenue
+2. Cost of Revenue: Cost of Goods Sold
+3. Gross Profit: Gross Profit
+4. General and Administrative Expense: Operating Expenses (General and Admin)
+5. Selling General and Administration: Operating Expenses (Selling)
+6. Selling and Marketing Expense: Operating Expenses (Selling and Marketing)
+7. Research and Development: Operating Expenses (R&D)
+8. Operating Expense: Sum of all Operating Expenses
+10. Operating Income: Operating Profit
 
-After completing the setup and ensuring the project runs locally, commit any additional changes and push them to GitHub:
+### Interest Expense
+1. Cash Flow Items
+2. Operating Cash Flow: Cash generated from operating activities
+3. Free Cash Flow: Operating Cash Flow - Capital Expenditure
+4. Capital Expenditure: Cash used for acquiring/maintaining assets
 
-```bash
-git add .
-git commit -m "Complete project setup with README and configuration files"
-git push origin main
+### Balance Sheet Items
+1. Total Assets: Sum of all assets
+2. Current Liabilities: Short-term liabilities
+3. Stockholders' Equity: Shareholders' Equity
+---
+## Features
+- Financial Data Analysis: Retrieve and process 10 years of financial reports.
+- Indicators Calculation: Automatically compute financial health and growth indicators.
+- Interactive Dashboard: Visualize financial data for better insights.
+- Chatbot Integration: Offer users an interactive way to clarify financial data.
+---
+## Contributing
+We welcome contributions! To contribute:
 
+1. Fork the repository. 
+2. Create a new branch (git checkout -b feature-branch). 
+3. Commit changes (git commit -m "Add new feature"). 
+4. Push to your branch (git push origin feature-branch). 
+5. Open a pull request.
 
+---
+## License
+This project is licensed under the MIT License. (optional)
 
-"This is the virtual Assistant for financial advice "
-#1. Introduction
-##Project Context
+---
+## Contact
+For any inquiries or issues, please contact:
+- Name: José Bernardo
+- Email: josebernardofisico@gmail.com
+- GitHub: jbernardo6u
 
-Nowadays, investing in the stock market of company shares is largely reserved for an elite group of people trained in business management and investments, or for those who, out of curiosity, self-teach themselves to achieve modest success. Even for those who possess the necessary skills, the process of analyzing and investing in companies with long-term growth potential is time-consuming and complex. It requires analyzing various financial documents, such as balance sheets, cash flow statements, and income statements from the last 10 years of a company's operations. This process can be very lengthy and prone to errors, even for the most experienced professionals.
-
-The objective of this project is to develop a virtual financial assistant that helps anyone invest in the stock market by proposing investment strategies based on detailed analysis of companies' financial documents, presented clearly through a dashboard.
-
-#2. Project Objectives
-##Main Objective
-
-Develop an intelligent virtual financial assistant that provides personalized and real-time investment advice, assisting users in making informed decisions in the stock market.
-
-##Specific Objectives
-
-Retrieve and analyze companies' financial reports, including income statements, cash flow statements, and balance sheets.
-Calculate precise indicators to determine companies' financial health and growth potential.
-Present the indicators visually to facilitate investment decision-making.
-Integrate a chatbot for conversational interaction and to clarify questions.
-Develop an intuitive and informative user interface.
-
-
-====================  xxx   ======================
-
-#Income statement items from API
-    1. Total Revenue  = Revenue = Operating Revenue
-    2. Cost Of Revenue  = Cost of gods sold
-    3. Gross Profit = Gross Profit
-    4. General And Administrative Expense = Operating Expenses (General and administ)
-    5. Selling General And Administration = Operating Expenses (Selling)
-    6. Selling And Marketing Expense   = Operating Expenses ( Selling and marketing)
-    7. Research And Development = Operating Expenses (R&D)
-    8. Operating Expense  = 
-    9. Operating Income = Operating Profit ???
-    10. Interest Expense =
-
-
-
-#Cash Flow items from API
-    1. Operating Cash Flow = 
-    2. Free Cash Flow	=
-    3. Capital Expenditure =
-
-
-#Balance sheet items from API
-    1. Total Assets	 = Assets
-    2. Current Liabilities	=
-    3. Stockholders Equity = Shareholders's Equity  ???
-
+---
