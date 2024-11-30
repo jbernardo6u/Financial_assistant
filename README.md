@@ -43,7 +43,7 @@ Develop an intelligent virtual financial assistant that provides personalized an
 - **`backend/`**: 
   - Django backend with REST API endpoints for financial data processing (e.g., `/analysis/`).
 - **`frontend/`**: 
-  - React frontend for user interaction and data visualization.
+  - React frontend for user interaction and data visualization.(e.g., `/frontend/`)
 
 ---
 
