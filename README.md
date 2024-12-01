@@ -58,7 +58,7 @@ Develop an intelligent virtual financial assistant that provides personalized an
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/Finance_assistant.git
+git clone https://github.com/jbernardo6u/Finance_assistant.git
 cd finance_assistant
 ```
 
