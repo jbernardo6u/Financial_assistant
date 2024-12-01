@@ -132,9 +132,9 @@ Test the frontend by visiting http://localhost:3000/.
 We welcome contributions! To contribute:
 
 1. Fork the repository. 
-2. Create a new branch (git checkout -b feature-branch). 
-3. Commit changes (git commit -m "Add new feature"). 
-4. Push to your branch (git push origin feature-branch). 
+2. Create a new branch (```git checkout -b feature-branch ```). 
+3. Commit changes (``` git commit -m "Add new feature" ```). 
+4. Push to your branch (``` git push origin feature-branch ```). 
 5. Open a pull request.
 
 ---
@@ -149,3 +149,5 @@ For any inquiries or issues, please contact:
 - GitHub: [jbernardo6u](https://github.com/jbernardo6u)
 
 ---
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/jose-bernardo-research-engineer/) [![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=flat-square&logo=github)](https://github.com/jbernardo6u) [![Instagram](https://img.shields.io/badge/Instagram-Follow-pink?style=flat-square&logo=instagram)](https://www.instagram.com/jb_bantu/)
