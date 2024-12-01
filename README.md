@@ -144,8 +144,8 @@ This project is licensed under the MIT License. (optional)
 ---
 ## Contact
 For any inquiries or issues, please contact:
-- Name: José Bernardo
-- Email: josebernardofisico@gmail.com
-- GitHub: jbernardo6u
+- Name: [José Bernardo](https://www.linkedin.com/in/jose-bernardo-research-engineer/)
+- Email: [josebernardofisico@gmail.com](josebernardofisicio@gmail.com)
+- GitHub: [jbernardo6u](https://github.com/jbernardo6u)
 
 ---
