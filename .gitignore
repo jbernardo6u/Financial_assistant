@@ -54,3 +54,4 @@ htmlcov/
 staticfiles/
 
 fetch_financial_data_withfilter.py
+configs.py

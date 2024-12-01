@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from analysis.configs import PORT, PASSWORD, USER
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -91,10 +92,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'finance_db',
-        'USER': 'josebantu',
-        'PASSWORD': '1994Loan@39',
+        'USER': USER,
+        'PASSWORD': PASSWORD,
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': PORT,
     }
 }
 

@@ -3,9 +3,9 @@ import requests
 from django.core.management.base import BaseCommand
 from analysis.models import Company, FinancialDocument
 from django.db import transaction
+from analysis.configs import ALPHA_VANTAGE_API_KEY
 
-# Alpha Vantage API Key
-ALPHA_VANTAGE_API_KEY = 'TYX7BASZ21ZB7CA8' #'J90GF2FV5KC3C88N'      #'F3Z55WYNQY3KJ1Y0'  # Replace with your API key   'WAE0T1ELGUKW2DC0'
+ALPHA_VANTAGE_API_KEY = ALPHA_VANTAGE_API_KEY
 NUM_YEARS = 10  # Define the number of years to process
 GLOBAL_DELAY = 15  # Global delay in seconds between API requests
 
