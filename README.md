@@ -13,6 +13,9 @@ Finance Assistant is a financial analysis tool designed to help users make infor
 4. [Requirements](#requirements)
 5. [Setup Instructions](#setup-instructions)
 6. [Financial Data from API](#financial-data-from-api)
+7. [Features](#Features)
+7. [Contributing](#Contributing)
+8. [License](#License)
 
 ---
 
