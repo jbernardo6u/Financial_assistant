@@ -108,14 +108,14 @@ Test the frontend by visiting http://localhost:3000/.
 5. Selling General and Administration: Operating Expenses (Selling)
 6. Selling and Marketing Expense: Operating Expenses (Selling and Marketing)
 7. Research and Development: Operating Expenses (R&D)
-8. Operating Expense: Sum of all Operating Expenses
-10. Operating Income: Operating Profit
+8. Operating Expense: Sum of all Operating Expenses 
+9. Operating Income: Operating Profit 
+10. Interest Expense
 
-### Interest Expense
-1. Cash Flow Items
-2. Operating Cash Flow: Cash generated from operating activities
-3. Free Cash Flow: Operating Cash Flow - Capital Expenditure
-4. Capital Expenditure: Cash used for acquiring/maintaining assets
+### Cash Flow Items
+1. Operating Cash Flow: Cash generated from operating activities 
+2. Free Cash Flow: Operating Cash Flow - Capital Expenditure 
+3. Capital Expenditure: Cash used for acquiring/maintaining assets
 
 ### Balance Sheet Items
 1. Total Assets: Sum of all assets
