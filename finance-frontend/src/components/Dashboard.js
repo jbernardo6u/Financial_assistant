@@ -24,7 +24,7 @@ function Dashboard() {
 
   return (
     <div>
-      <h1>Financial Dashboard</h1>
+      <h1>Your Finance Assistant</h1>
       <select onChange={(e) => setSelectedCompany(e.target.value)}>
         <option value="">Select Company</option>
         {companies.map((company) => (
