@@ -46,7 +46,7 @@ Develop an intelligent virtual financial assistant that provides personalized an
 - **`backend/`**: 
   - Django backend with REST API endpoints for financial data processing (e.g., `/analysis/`).
 - **`frontend/`**: 
-  - React frontend for user interaction and data visualization.(e.g., `/frontend/`)
+  - React frontend for user interaction and data visualization.(e.g., `/finance-frontend/`)
 
 ---
 
@@ -87,7 +87,7 @@ python manage.py runserver
 ### 3. Frontend Setup
 #### 3.1. Navigate to the frontend directory and install dependencies:
 ```bash
-cd frontend
+cd finance-frontend
 npm install
 ```
 
