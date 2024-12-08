@@ -4,6 +4,7 @@ djangorestframework
 psycopg2
 psycopg
 django~=5.1.2
+django-cors-headers
 requests~=2.32.3
 axios
 react-chartjs-2
