@@ -10,7 +10,7 @@ NUM_YEARS = NUM_OF_EXERCICES_YEARS  # Define the number of years to process
 GLOBAL_DELAY = 15  # Global delay in seconds between API requests
 
 
-def fetch_financial_data(symbol, report_type):
+def fetch_financial_data(symbol, report_type, num_year):
     """
     Fetch financial data for a given symbol and report type from Alpha Vantage.
     """
@@ -21,7 +21,7 @@ def fetch_financial_data(symbol, report_type):
         data = response.json()
 
         # Debug: Log the full response for troubleshooting
-        print(f"Full response for {symbol} ({report_type}): {data}")
+        # print(f"Full response for {symbol} ({report_type}): {data}")
 
         # Check for rate limit errors
         if "Note" in data:
@@ -34,7 +34,7 @@ def fetch_financial_data(symbol, report_type):
             if 'annualReports' not in data:
                 print(f"No annual reports data found for {symbol} ({report_type}).")
                 return None
-            return data['annualReports'][:NUM_YEARS]  # Return the last NUM_YEARS reports
+            return data['annualReports'][:num_year]  # Return the last NUM_YEARS reports
         elif report_type == 'OVERVIEW':
             if 'SharesOutstanding' not in data:
                 print(f"No SharesOutstanding data found for {symbol} in overview.")
