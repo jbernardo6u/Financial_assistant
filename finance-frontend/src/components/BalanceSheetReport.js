@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import BalanceSheetChart from "./BalanceSheetChart"; // Importando o componente de gráfico
 
 function BalanceSheetReport({ data }) {
+  const [showChart, setShowChart] = useState(false); // Estado para controlar a exibição do gráfico
+
   if (!data || data.length === 0) return null;
 
   // Função para formatar números com vírgulas para melhor legibilidade
   const formatNumber = (number) => {
     return number ? Number(number).toLocaleString() : 'N/A';
   };
+
+  // Preparar os dados para o gráfico
+  const years = data.map((yearData) => yearData.fiscalDateEnding);
+  const totalAssets = data.map((yearData) => yearData.totalAssets || 0);
+  const totalLiabilities = data.map((yearData) => yearData.totalLiabilities || 0);
+  const totalShareholderEquity = data.map((yearData) => yearData.totalShareholderEquity || 0);
 
   return (
     <div>
@@ -53,6 +62,19 @@ function BalanceSheetReport({ data }) {
           <hr />
         </div>
       ))}
+
+      {/* Botão para alternar a exibição do gráfico */}
+      <button onClick={() => setShowChart(!showChart)}>
+        {showChart ? 'Hide Graph' : 'Show Graph'}
+      </button>
+
+      {/* Exibindo o gráfico se o estado `showChart` for verdadeiro */}
+      {showChart && <BalanceSheetChart 
+        years={years} 
+        totalAssets={totalAssets} 
+        totalLiabilities={totalLiabilities} 
+        totalShareholderEquity={totalShareholderEquity} 
+      />}
     </div>
   );
 }

@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import CashFlowChart from "./CashFlowChart"; // Importando o componente de gráfico
 
 function CashFlowReport({ data }) {
+  const [showChart, setShowChart] = useState(false); // Estado para controlar a exibição do gráfico
+
   if (!data || data.length === 0) return null;
 
   // Função para formatar números com vírgulas para melhor legibilidade
   const formatNumber = (number) => {
     return number ? Number(number).toLocaleString() : 'N/A';
   };
+
+  // Preparar os dados para o gráfico
+  const years = data.map((yearData) => yearData.fiscalDateEnding);
+  const operatingCashFlow = data.map((yearData) => yearData.operatingCashflow || 0); 
+  const capitalExpenditures = data.map((yearData) => yearData.capitalExpenditures || 0);
+  const netIncome = data.map((yearData) => yearData.netIncome || 0);
 
   return (
     <div>
@@ -54,6 +63,19 @@ function CashFlowReport({ data }) {
           <hr />
         </div>
       ))}
+
+      {/* Botão para alternar a exibição do gráfico */}
+      <button onClick={() => setShowChart(!showChart)}>
+        {showChart ? 'Hide Graph' : 'Show Graph'}
+      </button>
+
+      {/* Exibindo o gráfico se o estado `showChart` for verdadeiro */}
+      {showChart && <CashFlowChart 
+        years={years} 
+        operatingCashFlow={operatingCashFlow} 
+        capitalExpenditures={capitalExpenditures} 
+        netIncome={netIncome} 
+      />}
     </div>
   );
 }

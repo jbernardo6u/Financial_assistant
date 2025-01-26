@@ -11,7 +11,7 @@ function Dashboard() {
   const [newCompanySymbol, setNewCompanySymbol] = useState("");
   const [selectedCompany, setSelectedCompany] = useState("");
   const [reportType, setReportType] = useState(""); // Default empty to force selection
-  const [numYears, setNumYears] = useState(5); // Default 5 years
+  const [numYears, setNumYears] = useState(1); // Default 1 years
   const [message, setMessage] = useState("");
   const [financialData, setFinancialData] = useState(null);
 

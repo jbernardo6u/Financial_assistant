@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import IncomeStatementChart from "./IncomeStatementChart"; // Importando o componente de gráfico
 
 function IncomeStatementReport({ data }) {
+  const [showChart, setShowChart] = useState(false); // Estado para controlar a exibição do gráfico
+
   if (!data || data.length === 0) return null;
 
   // Função para formatar números com vírgulas para melhor legibilidade
   const formatNumber = (number) => {
     return number ? Number(number).toLocaleString() : 'N/A';
   };
+
+  // Preparar os dados para o gráfico
+  const years = data.map((yearData) => yearData.fiscalDateEnding);
+  const totalRevenue = data.map((yearData) => yearData.totalRevenue || 0);
+  const grossProfit = data.map((yearData) => yearData.grossProfit || 0);
+  const operatingIncome = data.map((yearData) => yearData.operatingIncome || 0);
+  const netIncome = data.map((yearData) => yearData.netIncome || 0);
 
   return (
     <div>
@@ -53,6 +63,20 @@ function IncomeStatementReport({ data }) {
           <hr />
         </div>
       ))}
+
+      {/* Botão para alternar a exibição do gráfico */}
+      <button onClick={() => setShowChart(!showChart)}>
+        {showChart ? 'Hide Graph' : 'Show Graph'}
+      </button>
+
+      {/* Exibindo o gráfico se o estado `showChart` for verdadeiro */}
+      {showChart && <IncomeStatementChart 
+        years={years} 
+        totalRevenue={totalRevenue} 
+        grossProfit={grossProfit} 
+        operatingIncome={operatingIncome} 
+        netIncome={netIncome} 
+      />}
     </div>
   );
 }
