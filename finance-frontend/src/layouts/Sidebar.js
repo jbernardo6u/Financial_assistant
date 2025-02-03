@@ -10,29 +10,39 @@ const Sidebar = () => {
       </div>
       <nav className="sidebar-nav">
         <ul>
-          <li>
+        <li>
             <NavLink exact to="/" activeClassName="active">
-              Dashboard
+              Home
             </NavLink>
           </li>
           <li>
             <NavLink to="/add-company" activeClassName="active">
-              Ajouter une Entreprise
+              Add company
             </NavLink>
           </li>
           <li>
             <NavLink to="/analyze-data" activeClassName="active">
-              Analyser les Données
+              Analyze sociaties
+            </NavLink>
+          </li>
+          <li>
+            <NavLink exact to="/dashboard" activeClassName="active">
+              Dashboard
             </NavLink>
           </li>
           <li>
             <NavLink to="/view-graphs" activeClassName="active">
-              Voir les Graphiques
+              See tendencies
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/market-news" activeClassName="active">
+              Market news
             </NavLink>
           </li>
           <li>
             <NavLink to="/settings" activeClassName="active">
-              Paramètres
+              Settings
             </NavLink>
           </li>
         </ul>
