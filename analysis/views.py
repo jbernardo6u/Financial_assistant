@@ -6,6 +6,11 @@ from rest_framework.response import Response
 from analysis.models import Company, FinancialDocument, FinancialIndicator
 from analysis.serializers import CompanySerializer, FinancialDocumentSerializer, FinancialIndicatorSerializer
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from analysis.models import Company, FinancialIndicator
+from analysis.management.commands.calculate_indicators import Command
+
 class CompanyViewSet(viewsets.ViewSet):
     def list(self, request):
         """List all companies."""
@@ -49,8 +54,49 @@ class CompanyViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 class IndicatorViewSet(viewsets.ViewSet):
+    @api_view(['POST'])
+    def calculate_indicators(request):
+        company_id = request.data.get('company_id')
+        if not company_id:
+            return Response({'error': 'ID de l\'entreprise requis.'}, status=400)
+
+        try:
+            company = Company.objects.get(id=company_id)
+            calculate_command = Command()
+            calculate_command.handle(company=company)
+            return Response({'message': f'Indicateurs calculés pour {company.name}.'})
+        except Company.DoesNotExist:
+            return Response({'error': 'Entreprise introuvable.'}, status=404)
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
     def retrieve(self, request, company_pk, year):
         company = Company.objects.get(pk=company_pk)
         indicator = FinancialIndicator.objects.get(company=company, report_year=year)
         serializer = FinancialIndicatorSerializer(indicator)
         return Response(serializer.data)
+
+    @api_view(['GET'])
+    def get_indicators(request):
+        indicators = FinancialIndicator.objects.all()
+        data = [
+            {
+                'year': indicator.year,
+                'gross_profit_margin': indicator.gross_profit_margin,
+                'net_profit_margin': indicator.net_profit_margin,
+                # Add other fields as needed
+            }
+            for indicator in indicators
+        ]
+        return Response(data)
+
+
+@api_view(['POST'])
+def chatbot_interaction(request):
+    user_message = request.data.get('message')
+    response_message = f"Réponse automatique pour: {user_message}"  # Simulation
+    return Response({'message': response_message})
+
+
+
+
