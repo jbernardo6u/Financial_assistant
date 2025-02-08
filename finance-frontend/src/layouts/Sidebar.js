@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Sidebar.css'; // Assurez-vous de créer un fichier CSS correspondant pour styliser la barre latérale.
+import { AuthContext } from '../context/AuthContext';  // Adjust the path if needed
 
 const Sidebar = () => {
+  const { logout } = useContext(AuthContext);  // Get logout function from context
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -44,6 +46,9 @@ const Sidebar = () => {
             <NavLink to="/settings" activeClassName="active">
               Settings
             </NavLink>
+          </li>
+          <li>
+            <button onClick={() => logout()}>Logout</button>
           </li>
         </ul>
       </nav>

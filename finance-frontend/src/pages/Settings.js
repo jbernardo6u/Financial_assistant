@@ -4,11 +4,9 @@ import React from 'react';
 function Settings() {
   return (
     <div className="settings container">
-    <header className="App-header">
-        <p>
-          Here we can setting everthing
-        </p>
-      </header>
+      <h1>
+          Here we can setting everything
+       </h1>
     </div>
   );
 }

@@ -4,11 +4,9 @@ import React from 'react';
 function AnalyzeData() {
   return (
     <div className="analyze-data container">
-    <header className="App-header">
-        <p>
+        <h1>
           Here we can analyze data
-        </p>
-      </header>
+        </h1>
     </div>
   );
 }

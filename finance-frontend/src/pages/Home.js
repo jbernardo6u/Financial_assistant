@@ -6,7 +6,7 @@ import '../App.css';
 function Home() {
   return (
     <div className="home container">
-    <header className="App-header">
+        <header className="App-header">
         <img src={logosolon} className="App-logo" alt="logo" />
         <p>
           A satisfação dos nossos clientes é a nossa prioridade.
@@ -20,6 +20,7 @@ function Home() {
         gestion des investissements. Sélectionnez une option ci-dessus pour
         commencer.
       </p>
+
     </div>
   );
 }
