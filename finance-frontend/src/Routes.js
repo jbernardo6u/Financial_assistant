@@ -17,14 +17,14 @@ function AppRoutes() {
         <Sidebar />
         <div className="content">
           <Routes>
-            <Route exact path="/" component={Home} />
-            <Route path="/add-company" component={AddCompany} />
-            <Route path="/analyze-data" component={AnalyzeData} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route path="/view-graphs" component={ViewGraphs} />
-            <Route path="/market-news" component={MarketNews} />
-            <Route path="/fetch-data" component={FetchData} />
-            <Route path="/settings" component={Settings} />
+            <Route exact path="/" element={<Home />} />
+            <Route path="/add-company" element={<AddCompany />} />
+            <Route path="/analyze-data" element={<AnalyzeData />} />
+            <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route path="/view-graphs" element={<ViewGraphs />} />
+            <Route path="/market-news" element={<MarketNews />} />
+            <Route path="/fetch-data" element={<FetchData />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
       </div>

@@ -1,8 +1,7 @@
 import React from 'react';
-import Chart from 'chart.js/auto';
+import { Line } from 'react-chartjs-2';  // Import the Line chart component from react-chartjs-2
 
 function ViewGraphs() {
-  // Mock data for demonstration purposes
   const data = {
     labels: ['2019', '2020', '2021', '2022', '2023'],
     datasets: [
@@ -16,12 +15,12 @@ function ViewGraphs() {
   };
 
   return (
-    <div className="container">
+    <div className="view-graphs container">
       <h2>Graphiques Financiers</h2>
-      <canvas id="chart" />
-      <Chart type="line" data={data} />
+      <Line data={data} />
     </div>
   );
 }
 
 export default ViewGraphs;
+

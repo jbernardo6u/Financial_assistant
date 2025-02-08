@@ -1,3 +1,4 @@
+#analysis/management/commands/calculate_indicators.py
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from analysis.models import Company, FinancialDocument, FinancialIndicator

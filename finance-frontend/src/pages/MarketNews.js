@@ -2,12 +2,10 @@ import React from 'react';
 
 function MarketNews() {
   return (
-    <div className="home container">
-      <h1>Bienvenue chez Solon Tech</h1>
+    <div className="market-news container">
+      <h1>Here you can have all news about the market</h1>
       <p>
-        Votre assistant financier virtuel pour simplifier l'analyse et la
-        gestion des investissements. Sélectionnez une option ci-dessus pour
-        commencer.
+        Un assistente financeiro para facilitar te e acompanhar todo teu investimento
       </p>
     </div>
   );
